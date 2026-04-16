@@ -45,7 +45,7 @@ def evaluate_file(input_path: str) -> list[dict]:
             continue
 
         # Second stage: evaluate the valid parse tree
-        # If evaluation fails, tree and tokens remain valid and only the result becomes ERROR
+        # If evaluation fails, tree and tokens remain valid and only the result = ERROR
         try:
             result = evaluate_tree(tree)
 
