@@ -77,3 +77,69 @@ def evaluate_file(input_path: str) -> list[dict]:
         file.write("\n".join(output_lines))
 
     return results
+
+def build_output_path(input_path: str) -> str:
+    # Build the path for output_q2.txt in the same folder as the input file
+    import os
+    return os.path.join(os.path.dirname(input_path), "output_q2.txt")
+
+
+def tokenize(expr: str) -> list[tuple[str, str]]:
+    # Convert the input string to list of tokens
+    tokens = []
+    i = 0
+    n = len(expr)
+
+    while i < n:
+        c = expr[i]
+
+        # Ignore whitespace
+        if c.isspace():
+            i += 1
+            continue
+
+        # Read a numeric literal
+        if c.isdigit() or c == ".":
+            start = i
+            dot_count = 0
+
+            while i < n and (expr[i].isdigit() or expr[i] == "."):
+                if expr[i] == ".":
+                    dot_count += 1
+                    if dot_count > 1:
+                        raise ValueError("Invalid number")
+                i += 1
+
+            number_text = expr[start:i]
+
+            # Single dot alone is not a valid number
+            if number_text == ".":
+                raise ValueError("Invalid number")
+
+            tokens.append(("NUM", number_text))
+            continue
+
+        # Read arithmetic operators
+        if c in "+-*/":
+            tokens.append(("OP", c))
+            i += 1
+            continue
+
+        # Read opening parenthesis
+        if c == "(":
+            tokens.append(("LPAREN", c))
+            i += 1
+            continue
+
+        # Read closing parenthesis
+        if c == ")":
+            tokens.append(("RPAREN", c))
+            i += 1
+            continue
+
+        # Any other character is invalid
+        raise ValueError("Invalid character")
+
+    # Add an END token as the end of input
+    tokens.append(("END", ""))
+    return tokens
