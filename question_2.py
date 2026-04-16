@@ -296,4 +296,11 @@ def format_result(value: float) -> str:
     if value.is_integer():
         return str(int(value))
     return f"{round(value, 4):.4f}".rstrip("0").rstrip(".")
+
+# Run evaluator on input and display output
+input_file = "/content/sample_input.txt"
+results = evaluate_file(input_file)
+
+with open("/content/output_q2.txt", "r", encoding="utf-8") as f:
+    print(f.read())
     
