@@ -1,23 +1,27 @@
-def encrypt_text(text, shift1, shift2):
-    result = ""
+def encrypt(text, shift1, shift2):
+    encrypted = ""
+    rules = []
 
     for ch in text:
-        if ch.islower():
-            # lower so positive sifts mulitiplication
-            shift = shift1 * shift2
-            s = (ord(ch) - ord('a') + shift)
-            result += chr( s % 26 + ord('a')) # coverting back to ascii text 
-
-        elif ch.isupper():
-            # upper so positive square - shift
-            shift = shift2 ** 2 - shift1
-            s = (ord(ch) - ord('A') + shift)
-            result += chr( s % 26 + ord('A'))
-
+        if 'a' <= ch <= 'm':
+            new = chr((ord(ch)-97 + shift1*shift2) % 26 + 97)
+            rules.append("1")
+        elif 'n' <= ch <= 'z':
+            new = chr((ord(ch)-97 - (shift1+shift2)) % 26 + 97)
+            rules.append("2")
+        elif 'A' <= ch <= 'M':
+            new = chr((ord(ch)-65 - shift1) % 26 + 65)
+            rules.append("3")
+        elif 'N' <= ch <= 'Z':
+            new = chr((ord(ch)-65 + shift2**2) % 26 + 65)
+            rules.append("4")
         else:
-            result += ch
+            new = ch
+            rules.append("0")
 
-    return result
+        encrypted += new
+
+    return encrypted, rules
 
 def decrypt(text, rules, shift1, shift2):
     decrypted = ""
