@@ -8,15 +8,16 @@ This repository contains solutions for HIT137 Group Assignment 2:
 
 ---
 
-## Project Structure
 .
-├── question_1.py
-├── raw_text.txt
-├── encrypted_text.txt
-├── decrypted_text.txt
-├── evaluator.py
-├── sample_input.txt
-├── output.txt
+├── question_1.py            # Solution for Question 1
+├── raw_text.txt             # Input file for Q1
+├── encrypted_text.txt       # Encrypted output (Q1)
+├── decrypted_text.txt       # Decrypted output (Q1)
+
+├── evaluator.py             # Solution for Question 2
+├── sample_input.txt         # Input file for Q2
+├── output.txt               # Output file for Q2
+
 ├── README.md
 
 ---
