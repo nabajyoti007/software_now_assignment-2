@@ -52,11 +52,11 @@ def main():
         raw = f.read()
     encrypted, rules = encrypt(raw, shift1, shift2)
 
-    with open("Q1 encrypted_text.txt", "w", encoding="utf-8") as f:
+    with open("encrypted_text.txt", "w", encoding="utf-8") as f:
         f.write(encrypted)
     decrypted = decrypt(encrypted, rules, shift1, shift2)
 
-    with open("Q1 decrypted_text.txt", "w", encoding="utf-8") as f:
+    with open("decrypted_text.txt", "w", encoding="utf-8") as f:
         f.write(decrypted)
 
     if raw == decrypted:
