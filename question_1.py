@@ -19,51 +19,44 @@ def encrypt_text(text, shift1, shift2):
 
     return result
 
+def decrypt(text, rules, shift1, shift2):
+    decrypted = ""
 
-def decrypt_text(text, shift1, shift2):
-    result = ""
+    for i in range(len(text)):
+        ch = text[i]
+        rule = rules[i]
 
-    for ch in text:
-        if ch.islower():
-            # lower so negative sifts mulitiplication
-            shift = -(shift1 * shift2)
-            s = (ord(ch) - ord('a') + shift)
-            result += chr( s % 26 + ord('a'))
-
-        elif ch.isupper():
-            # upper so negative square - shift
-            shift = -(shift2 ** 2 - shift1)
-            s = (ord(ch) - ord('A') + shift)
-            result += chr( s % 26 + ord('A'))
-
+        if rule == "1":
+            new = chr((ord(ch)-97 - shift1*shift2) % 26 + 97)
+        elif rule == "2":
+            new = chr((ord(ch)-97 + (shift1+shift2)) % 26 + 97)
+        elif rule == "3":
+            new = chr((ord(ch)-65 + shift1) % 26 + 65)
+        elif rule == "4":
+            new = chr((ord(ch)-65 - shift2**2) % 26 + 65)
         else:
-            result += ch
+            new = ch
 
-    return result
+        decrypted += new
 
-def verify(original, decrypted):
-    if original == decrypted:
-        print("✅ Decryption Successful!")
-    else:
-        print("❌ Decryption Failed!")
-
-
+    return decrypted
 def main():
     shift1 = int(input("Enter shift1: "))
     shift2 = int(input("Enter shift2: "))
 
-    with open("raw_text.txt", "r") as f:
-        raw_text = f.read()
+    with open("raw_text.txt", "r", encoding="utf-8") as f:
+        raw = f.read()
+    encrypted, rules = encrypt(raw, shift1, shift2)
 
-    encrypted = encrypt_text(raw_text, shift1, shift2)
-    with open("encrypted_text.txt", "w") as f:
+    with open("encrypted_text.txt", "w", encoding="utf-8") as f:
         f.write(encrypted)
+    decrypted = decrypt(encrypted, rules, shift1, shift2)
 
-    decrypted = decrypt_text(encrypted, shift1, shift2)
-    with open("decrypted_text.txt", "w") as f:
+    with open("decrypted_text.txt", "w", encoding="utf-8") as f:
         f.write(decrypted)
 
-    verify(raw_text, decrypted)
-
-
+    if raw == decrypted:
+        print("Decryption Successful")
+    else:
+        print("Decryption Failed")
 main()
