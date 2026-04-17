@@ -81,7 +81,7 @@ def evaluate_file(input_path: str) -> list[dict]:
 def build_output_path(input_path: str) -> str:
     # Build the path for output_q2.txt in the same folder as the input file
     import os
-    return os.path.join(os.path.dirname(input_path), "output_q2.txt")
+    return os.path.join(os.path.dirname(input_path), "output.txt")
 
 
 def tokenize(expr: str) -> list[tuple[str, str]]:
@@ -301,6 +301,6 @@ def format_result(value: float) -> str:
 input_file = "/content/sample_input.txt"
 results = evaluate_file(input_file)
 
-with open("/content/output_q2.txt", "r", encoding="utf-8") as f:
+with open("/content/output.txt", "r", encoding="utf-8") as f:
     print(f.read())
     
