@@ -3,16 +3,16 @@ def encrypt(text, shift1, shift2):
     rules = []
 
     for ch in text:
-        if 'a' <= ch <= 'm':
+        if 'a' <= ch <= 'm':    # small letters a-m
             new = chr((ord(ch)-97 + shift1*shift2) % 26 + 97)
             rules.append("1")
-        elif 'n' <= ch <= 'z':
+        elif 'n' <= ch <= 'z':    # small letters n-z
             new = chr((ord(ch)-97 - (shift1+shift2)) % 26 + 97)
             rules.append("2")
-        elif 'A' <= ch <= 'M':
+        elif 'A' <= ch <= 'M':    # capital letters A-M
             new = chr((ord(ch)-65 - shift1) % 26 + 65)
             rules.append("3")
-        elif 'N' <= ch <= 'Z':
+        elif 'N' <= ch <= 'Z':    # capital letters N-Z
             new = chr((ord(ch)-65 + shift2**2) % 26 + 65)
             rules.append("4")
         else:
@@ -23,7 +23,7 @@ def encrypt(text, shift1, shift2):
 
     return encrypted, rules
 
-def decrypt(text, rules, shift1, shift2):
+def decrypt(text, rules, shift1, shift2):    # decryption function (reverse of above)
     decrypted = ""
 
     for i in range(len(text)):
@@ -48,18 +48,18 @@ def main():
     shift1 = int(input("Enter shift1: "))
     shift2 = int(input("Enter shift2: "))
 
-    with open("raw_text.txt", "r", encoding="utf-8") as f:
+    with open("raw_text.txt", "r", encoding="utf-8") as f:     # read input file
         raw = f.read()
     encrypted, rules = encrypt(raw, shift1, shift2)
 
-    with open("encrypted_text.txt", "w", encoding="utf-8") as f:
+    with open("encrypted_text.txt", "w", encoding="utf-8") as f:     # save encrypted
         f.write(encrypted)
     decrypted = decrypt(encrypted, rules, shift1, shift2)
 
-    with open("decrypted_text.txt", "w", encoding="utf-8") as f:
+    with open("decrypted_text.txt", "w", encoding="utf-8") as f:     # save decrypted
         f.write(decrypted)
 
-    if raw == decrypted:
+    if raw == decrypted:    # check if worked or not
         print("Decryption Successful")
     else:
         print("Decryption Failed")
