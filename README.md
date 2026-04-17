@@ -6,8 +6,9 @@ This repository contains solutions for HIT137 Group Assignment 2:
 - Question 1: File Encryption and Decryption Program  
 - Question 2: Mathematical Expression Evaluator  
 
----
+## Project Structure
 
+```text
 .
 ├── question_1.py            # Solution for Question 1
 ├── raw_text.txt             # Input file for Q1
@@ -19,8 +20,6 @@ This repository contains solutions for HIT137 Group Assignment 2:
 ├── output.txt               # Output file for Q2
 
 ├── README.md
-
----
 
 ## Question 1: Encryption & Decryption
 
